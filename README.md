@@ -21,9 +21,12 @@
 ## Dinsdag
 •	8u15 tot 16u45 (0,5u pauze)
 •	Onderzoek parameters om te meten (Trillingen + Temperatuur + Thrust)
-•	
 ## Woensdag
-•	
+•	8u15 tot 16u45 (0,5u pauze)
+•	Onderzoek afwerken (opzoeken ESC temperatuur)
+•	Schets maken van testbank
+•	bespreken van deze onderdelen
+•	bestelling klaarmaken
 ## Donderdag
 •	PXL job-event
 ## Vrijdag
