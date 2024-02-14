@@ -25,10 +25,10 @@
 •	8u15 tot 16u45 (0,5u pauze)
 •	Onderzoek afwerken (Torque, opzoeken ESC temperatuur sensor)
 •	Schets maken van testbank
-•	bespreken van deze onderdelen
 ## Donderdag
 •	PXL job-event
 ## Vrijdag
+•	bespreken van deze onderdelen
 •	bestelling klaarmaken
 
  
