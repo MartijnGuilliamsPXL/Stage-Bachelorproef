@@ -3,9 +3,11 @@
 # Week 1
 ## Planning
 	Testbank onderzoek af 
+
 	+ bestelling klaarzetten
 
 	Parameters onderzoek af 
+
 	+ bestelling klaarzetten
 
 	Schets maken van schakeling
