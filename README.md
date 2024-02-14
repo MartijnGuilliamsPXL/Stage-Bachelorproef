@@ -2,49 +2,42 @@
 
 # Week 1
 ## Planning
-	Testbank onderzoek af 
+- [x]	Testbank onderzoek af 
+- [ ]	+ bestelling klaarzetten
 
-	+ bestelling klaarzetten
+- [ ]	Parameters onderzoek af
+- [ ]	+ bestelling klaarzetten
 
-	Parameters onderzoek af 
+- [ ]	Schets maken van schakeling
 
-	+ bestelling klaarzetten
-
-	Schets maken van schakeling
-
-	Mogelijke bestelling eind deze week of begin volgende week
+- [ ]	Mogelijke bestelling begin volgende week
 ## Maandag
-•	9u tot 18u (1u pauze)
-
-•	Rondleiding
-
-•	Overleg stappenplan
-
-•	Onderzoek testbank + parameters om te meten (Thrust)
+-	9u tot 18u (1u pauze)
+-	Rondleiding
+- Overleg stappenplan
+- Onderzoek testbank + parameters om te meten (Thrust)
 
 
 ## Dinsdag
-•	8u15 tot 16u45 (0,5u pauze)
-
-•	Onderzoek parameters om te meten (Trillingen + Temperatuur + Thrust)
+- 8u15 tot 16u45 (0,5u pauze)
+- Onderzoek parameters om te meten (Trillingen + Temperatuur + Thrust)
 
 
 ## Woensdag
-•	8u15 tot 16u45 (0,5u pauze)
-
-•	Onderzoek afwerken (Torque, opzoeken ESC temperatuur sensor)
-
-•	Schets maken van testbank
+- 8u15 tot 16u45 (0,5u pauze)
+- Onderzoek afwerken (Torque, opzoeken ESC temperatuur sensor, geluid)
+- Stroom en spanning professioneler oplossen
+- Schets maken van testbank
 
 
 ## Donderdag
-•	PXL job-event
+- PXL job-event
 
 
 ## Vrijdag
-•	bespreken van deze onderdelen
+- bespreken van deze onderdelen
 
-•	bestelling klaarmaken
+- bestelling klaarmaken
 
  
 # Week 2
