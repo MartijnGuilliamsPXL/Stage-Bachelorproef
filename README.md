@@ -5,15 +5,15 @@
 - [x]	Testbank onderzoek af 
 - [ ]	+ bestelling klaarzetten
 
-- [ ]	Parameters onderzoek af
+- [x]	Parameters onderzoek af
 - [ ]	+ bestelling klaarzetten
 
-- [ ]	Schets maken van schakeling
+- [x]	Schets maken van schakeling
 
-- [ ]	Mogelijke bestelling begin volgende week
+
 ## Maandag
--	9u tot 18u (1u pauze)
--	Rondleiding
+- 9u tot 18u (1u pauze)
+- Rondleiding
 - Overleg stappenplan
 - Onderzoek testbank + parameters om te meten (Thrust)
 
@@ -35,13 +35,53 @@
 
 
 ## Vrijdag
-- bespreken van deze onderdelen
-
-- bestelling klaarmaken
+- Bestelling klaarmaken
+- Bespreken van deze onderdelen
+- Aan paper beginnen
+  
 
  
 # Week 2
 ## Planning
+- [ ]	Bespreking onderdelen met Michiel A
+- [ ]	Bestelling onderdelen
+- [ ]   Website onderzoeken (tijdens wachten op onderdelen) 
+
+## Maandag
+
+## Dinsdag
+
+## Woensdag
+
+## Donderdag
+
+## Vrijdag
+
+
+
+# Week 3
+## Planning
+- [ ]	
+- [ ]	
+- [ ]   
+
+## Maandag
+
+## Dinsdag
+
+## Woensdag
+
+## Donderdag
+
+## Vrijdag
+
+
+
+# Week 4
+## Planning
+- [ ]	
+- [ ]	
+- [ ]   
 
 ## Maandag
 
