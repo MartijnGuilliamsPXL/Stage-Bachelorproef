@@ -8,7 +8,8 @@
 - [x]	Parameters onderzoek af
 - [ ]	+ bestelling klaarzetten
 
-- [x]	Schets maken van schakeling
+- [x]	Schets maken van opstelling
+- [ ]   Schets van schakeling
 
 
 ## Maandag
@@ -35,8 +36,10 @@
 
 
 ## Vrijdag
-- Bestelling klaarmaken
+- 8u15 tot 16u45 (0,5u pauze)
 - Bespreken van deze onderdelen
+- Meer onderzoek naar torque meten
+- Aanpassingen maken voor eerst enkel één motor testen
 - Aan paper beginnen
   
 
