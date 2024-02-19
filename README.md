@@ -51,7 +51,10 @@
 - [ ]   Website onderzoeken (tijdens wachten op onderdelen) 
 
 ## Maandag
-
+- 8u tot 16u30 (0,5u pauze)
+- Bespreken onderdelen 
+- Bestelling
+- Extra uitleg stage (15u op Blackboard)
 ## Dinsdag
 
 ## Woensdag
