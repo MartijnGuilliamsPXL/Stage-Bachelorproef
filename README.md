@@ -9,7 +9,7 @@
 - [ ]	+ bestelling klaarzetten
 
 - [x]	Schets maken van opstelling
-- [ ]   Schets van schakeling
+- [x]   Schets van schakeling
 
 
 ## Maandag
@@ -48,14 +48,19 @@
 ## Planning
 - [ ]	Bespreking onderdelen met Michiel A
 - [ ]	Bestelling onderdelen
+- [ ]   Testen IR 
 - [ ]   Website onderzoeken (tijdens wachten op onderdelen) 
 
 ## Maandag
 - 8u tot 16u30 (0,5u pauze)
+- Onderzoek
+- Extra uitleg stage (15u op Blackboard)
+
+
+## Dinsdag
+- Dynamische microfoons onderzoeken
 - Bespreken onderdelen 
 - Bestelling
-- Extra uitleg stage (15u op Blackboard)
-## Dinsdag
 
 ## Woensdag
 
