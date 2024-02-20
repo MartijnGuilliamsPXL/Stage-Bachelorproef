@@ -58,9 +58,11 @@
 
 
 ## Dinsdag
+- 8u15 tot 16u45 (0,5u pauze)
 - Dynamische microfoons onderzoeken
 - Bespreken onderdelen 
 - Bestelling
+- Testing infrarood
 
 ## Woensdag
 
