@@ -46,7 +46,7 @@
  
 # Week 2
 ## Planning
-- [ ]	Bespreking onderdelen met Michiel A
+- [x]	Bespreking onderdelen met Michiel A
 - [ ]	Bestelling onderdelen
 - [ ]   Testen IR 
 - [ ]   Website onderzoeken (tijdens wachten op onderdelen) 
@@ -62,9 +62,15 @@
 - Bespreken onderdelen 
 - Testing infrarood
 
+
 ## Woensdag
+- 8u15 tot 16u45 (0,5u pauze)
+- BOM
+- Testing infrarood
+
 
 ## Donderdag
+
 
 ## Vrijdag
 
