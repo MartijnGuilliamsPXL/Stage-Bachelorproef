@@ -47,7 +47,7 @@
 # Week 2
 ## Planning
 - [x]	Bespreking onderdelen met Michiel A
-- [ ]	Bestelling onderdelen
+- [x]	Bestelling onderdelen
 - [ ]   Testen IR 
 - [ ]   Website onderzoeken (tijdens wachten op onderdelen) 
 
@@ -70,7 +70,9 @@
 
 
 ## Donderdag
-
+- 8u15 tot 16u45 (0,5u pauze)
+- Testing infrarood met motor
+- Fusion 360 - motor mount
 
 ## Vrijdag
 
