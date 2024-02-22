@@ -1,5 +1,3 @@
-// Rotary Encoder RPM Measurement using Timer Interrupts
-
 const int sensorPin = 2; // Example pin for sensor input
 
 volatile unsigned int counts = 0; // Counter for rotations
@@ -7,12 +5,13 @@ volatile unsigned int rpm = 0; // Variable to store RPM
 volatile unsigned long prevTime = 0; // Variable to store previous time
 
 volatile bool execute = false;
+volatile int lastSensorState = LOW; // Variable to store the previous state of the sensor
 
 void setup() {
   Serial.begin(115200);
   
   // Attach interrupt to sensor pin
-  attachInterrupt(digitalPinToInterrupt(sensorPin), countRotations, RISING);
+  attachInterrupt(digitalPinToInterrupt(sensorPin), countRotations, FALLING);
 
   // Pause interrupts
   cli();
@@ -55,10 +54,11 @@ void loop() {
 
   // Print RPM to serial monitor
   //Serial.print("RPM: ");
-  //Serial.println(rpm);
+  Serial.println(rpm);
 
   // Reset rotation counter
-  //counts = 0;
+  //Serial.println(counts);
+  counts = 0;
 
 	// Don't forget to reset the flag
 	execute = false;
@@ -66,8 +66,23 @@ void loop() {
 }
 
 void countRotations() {
-  counts++; // Increment rotation counter
-  Serial.println(counts);
+  static unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
+  unsigned long debounceDelay = 2;    // the debounce time; increase if the output flickers
+
+  // Read the state of the sensor
+  int currentState = digitalRead(sensorPin);
+
+  // If the state has changed since the last read, debounce
+  if (currentState != lastSensorState) {
+    lastDebounceTime = millis();
+  }
+
+  // Check if a new rotation is detected after debouncing
+  if ((millis() - lastDebounceTime) > debounceDelay) {
+    counts++; // Increment rotation counter
+  }
+
+  lastSensorState = currentState;
 }
 
 ISR(TIMER1_COMPA_vect)
@@ -77,4 +92,3 @@ ISR(TIMER1_COMPA_vect)
  
   execute = true;
 }
-
