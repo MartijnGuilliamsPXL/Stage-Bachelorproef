@@ -70,7 +70,7 @@
 
 
 ## Donderdag
-- 8u15 tot 16u45 (0,5u pauze)
+- 8u tot 16u30 (0,5u pauze)
 - Testing infrarood met motor
 - Fusion 360 - motor mount
 
