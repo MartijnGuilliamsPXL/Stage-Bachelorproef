@@ -57,7 +57,7 @@ void loop() {
   prevTime = currentTime;
 
   // Calculate RPM
-  rpm = (counts * 60000000) / elapsedTime; // Convert from pulses per second to pulses per minute
+  rpm = (counts * 60000) / elapsedTime; // Convert from pulses per second to pulses per minute
 
 
   // Print RPM to serial monitor

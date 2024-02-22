@@ -43,29 +43,33 @@ void setup() {
 void loop() {
   if(execute)
   {
-    currentTime = micros();
-    diffTime = currentTime - lastTime;
     
-    if(diffTime > 1000000)
+    //currentTime = micros();
+    //diffTime = currentTime - lastTime;
+    if(0 > 1000000)
     {
       rpm = 0;
+      Serial.println(rpm);
+
     }
-    
-    //Serial.println(rpm);
+    else
+    {
+      Serial.println(60.00 / (diffTime / 1000.00));
+    }
     execute = false;
   }
 }
 
 void rpm_measure() {
   if (firstPulse) {
-    lastTime = micros();
+    lastTime = millis();
     firstPulse = false;
   } else {
-    currentTime = micros();
+    currentTime = millis();
     diffTime = currentTime - lastTime;
-    rpm = 60.0 / (diffTime / 1000000.0);
+    //rpm = 60.0 / (diffTime / 1000000.0);
     //Serial.print("RPM = ");
-    Serial.println(diffTime);
+    //Serial.println(diffTime);
     lastTime = currentTime;
   }
 }

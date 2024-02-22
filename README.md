@@ -72,10 +72,9 @@
 ## Donderdag
 - 8u tot 16u30 (0,5u pauze)
 - Testing infrarood met motor
-- Fusion 360 - motor mount
 
 ## Vrijdag
-
+- Fusion 360 - motor mount
 
 
 # Week 3
