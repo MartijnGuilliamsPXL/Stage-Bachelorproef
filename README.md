@@ -3,13 +3,12 @@
 # Week 1
 ## Planning
 - [x]	Testbank onderzoek af 
-- [ ]	+ bestelling klaarzetten
+- [x]	+ bestelling klaarzetten
 
 - [x]	Parameters onderzoek af
-- [ ]	+ bestelling klaarzetten
+- [x]	+ bestelling klaarzetten
 
 - [x]	Schets maken van opstelling
-- [x]   Schets van schakeling
 
 
 ## Maandag
@@ -46,10 +45,9 @@
  
 # Week 2
 ## Planning
-- [x]	Bespreking onderdelen met Michiel A
+- [x]	Bespreking onderdelen
 - [x]	Bestelling onderdelen
-- [ ]   Testen IR 
-- [ ]   Website onderzoeken (tijdens wachten op onderdelen) 
+- [x]   Testen IR 
 
 ## Maandag
 - 8u tot 16u30 (0,5u pauze)
@@ -74,14 +72,18 @@
 - Testing infrarood met motor
 
 ## Vrijdag
-- Fusion 360 - motor mount
+- 8u15 tot 16u45 (0,5u pauze)
+- Weekplanning maken voor heel de stage
+- Motor mount - fusion 360
+
 
 
 # Week 3
 ## Planning
-- [ ]	
-- [ ]	
-- [ ]   
+- [ ]	Kick-off video
+- [ ]	Kick-off presentatie voorbereiden
+- [ ]   Motor mount - fusion 360
+- [ ]   Testen onderdelen
 
 ## Maandag
 
