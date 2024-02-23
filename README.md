@@ -64,12 +64,13 @@
 ## Woensdag
 - 8u15 tot 16u45 (0,5u pauze)
 - BOM
-- Testing infrarood
+- Testen temperatuur sensor
+- Testen infrarood
 
 
 ## Donderdag
 - 8u tot 16u30 (0,5u pauze)
-- Testing infrarood met motor
+- Testen infrarood met motor
 
 ## Vrijdag
 - 8u15 tot 16u45 (0,5u pauze)
