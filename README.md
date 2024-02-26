@@ -87,6 +87,10 @@
 - [ ]   Testen onderdelen
 
 ## Maandag
+- 8u tot 16u30 (0,5u pauze)
+- Kick-off video
+- Kick-off presentatie voorbereiden
+- Testen onderdelen (Audio)
 
 ## Dinsdag
 

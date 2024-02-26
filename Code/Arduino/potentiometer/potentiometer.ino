@@ -14,6 +14,6 @@ void loop()
 
   Serial.println(potVal/4);
 
-  analogWrite(10, potVal/4);
+  analogWrite(10, (potVal/4)-1);
 
 }

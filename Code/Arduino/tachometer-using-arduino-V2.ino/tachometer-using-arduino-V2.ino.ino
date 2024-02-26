@@ -9,7 +9,7 @@ volatile unsigned long rpm = 0;
 
 void setup() {
   Serial.begin(115200);
-  attachInterrupt(0, rpm_measure, RISING); // interrupt 0 is on pin 2
+  attachInterrupt(0, rpm_measure, FALLING); // interrupt 0 is on pin 2
   lastTime = 0;
   currentTime = 0;
 
@@ -24,7 +24,7 @@ void setup() {
   // Set the value that the counter has to reach before it triggers an interrupt
   // 15624 = 1s (assuming you use 1024 as the prescaler value)
   // Counter1 is 16-bit so the value must be less than or equal to 65535
-  OCR1A = 15624; //3906 1/4s //15624 =1s
+  OCR1A = 156.24; //3906 1/4s //15624 =1s
  
   // Clear timer on compare match
   // The timer resets itself when it reaches 15625 (OCR1A +1)
@@ -43,31 +43,27 @@ void setup() {
 void loop() {
   if(execute)
   {
+    currentTime = micros();
+    diffTime = currentTime - lastTime;
     
-    //currentTime = micros();
-    //diffTime = currentTime - lastTime;
-    if(0 > 1000000)
+    if(diffTime > 1000000)
     {
       rpm = 0;
-      Serial.println(rpm);
-
     }
-    else
-    {
-      Serial.println(60.00 / (diffTime / 1000.00));
-    }
+    
+    Serial.println(rpm);
     execute = false;
   }
 }
 
 void rpm_measure() {
   if (firstPulse) {
-    lastTime = millis();
+    lastTime = micros();
     firstPulse = false;
   } else {
-    currentTime = millis();
+    currentTime = micros();
     diffTime = currentTime - lastTime;
-    //rpm = 60.0 / (diffTime / 1000000.0);
+    rpm = 60.0 / (diffTime / 1000000.0);
     //Serial.print("RPM = ");
     //Serial.println(diffTime);
     lastTime = currentTime;
