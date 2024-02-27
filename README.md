@@ -97,7 +97,7 @@
 - Kick-off video
 - Kick-off presentatie voorbereiden
 - 1ste Opstelling klaarzetten
-- 
+- Application Note (Materiaal en methoden)
 
 ## Woensdag
 
