@@ -83,16 +83,21 @@
 ## Planning
 - [ ]	Kick-off video
 - [ ]	Kick-off presentatie voorbereiden
-- [ ]   Motor mount - fusion 360
+- [x]   Motor mount - fusion 360
 - [ ]   Testen onderdelen
 
 ## Maandag
 - 8u tot 16u30 (0,5u pauze)
 - Kick-off video
 - Kick-off presentatie voorbereiden
-- Testen onderdelen (Audio)
+- Testen onderdelen (Nieuwe IR, Audio)
 
 ## Dinsdag
+- 8u15 tot 16u45 (0,5u pauze)
+- Kick-off video
+- Kick-off presentatie voorbereiden
+- 1ste Opstelling klaarzetten
+- 
 
 ## Woensdag
 

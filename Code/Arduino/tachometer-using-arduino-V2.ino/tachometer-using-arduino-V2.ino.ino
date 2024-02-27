@@ -51,7 +51,7 @@ void loop() {
       rpm = 0;
     }
     
-    Serial.println(rpm);
+    Serial.println(rpm/2);
     execute = false;
   }
 }
