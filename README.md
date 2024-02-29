@@ -107,7 +107,7 @@
 ## Donderdag
 - 8u tot 16u30 (0,5u pauze)
 - Kick-off presentation
-- Motor mount V4 (testen van geheel, niet finale opstelling)
+- Motor mount V4
 
 ## Vrijdag
 
