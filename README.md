@@ -81,10 +81,10 @@
 
 # Week 3
 ## Planning
-- [ ]	Kick-off video
-- [ ]	Kick-off presentatie voorbereiden
+- [x]	Kick-off video
+- [x]	Kick-off presentatie voorbereiden
 - [x]   Motor mount - fusion 360
-- [ ]   Testen onderdelen
+- [x]   Testen een deel van de onderdelen
 
 ## Maandag
 - 8u tot 16u30 (0,5u pauze)
@@ -110,8 +110,10 @@
 - Motor mount V4
 
 ## Vrijdag
-
-
+- 8u tot 16u30 (0,5u pauze)
+- Kick-off presentation
+- BNO055 sensor testen
+- Opstelling klaarzetten
 
 # Week 4
 ## Planning
