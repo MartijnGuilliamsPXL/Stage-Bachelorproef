@@ -117,11 +117,13 @@
 
 # Week 4
 ## Planning
-- [ ]	
-- [ ]	
-- [ ]   
+- [ ]	Opstelling afwerken
+- [ ]	Loadcells testen
+- [ ]   BNO055 code afwerken
 
 ## Maandag
+- 8u tot 16u30 (0,5u pauze)
+- Opstelling afwerken
 
 ## Dinsdag
 
