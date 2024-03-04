@@ -30,6 +30,8 @@ void setup() {
   calibrationData.accel_radius = 1000;
 
   bno.setSensorOffsets(calibrationData);
+
+  delay(1000);
 }
 
 void loop(void)
@@ -39,23 +41,33 @@ void loop(void)
   bno.getEvent(&orientationData, Adafruit_BNO055::VECTOR_EULER);
   bno.getEvent(&angVelocityData, Adafruit_BNO055::VECTOR_GYROSCOPE);
   bno.getEvent(&linearAccelData, Adafruit_BNO055::VECTOR_LINEARACCEL);
-  //bno.getEvent(&magnetometerData, Adafruit_BNO055::VECTOR_MAGNETOMETER);
+  bno.getEvent(&magnetometerData, Adafruit_BNO055::VECTOR_MAGNETOMETER);
   bno.getEvent(&accelerometerData, Adafruit_BNO055::VECTOR_ACCELEROMETER);
   bno.getEvent(&gravityData, Adafruit_BNO055::VECTOR_GRAVITY);
-
-  printEvent(&orientationData);
-  printEvent(&angVelocityData);
-  printEvent(&linearAccelData);
-  //printEvent(&magnetometerData);
-  printEvent(&accelerometerData);
-  printEvent(&gravityData);
+  imu::Quaternion quat = bno.getQuat();
+  
+  Serial.print("quat:");
+  Serial.print(quat.w(), 4);
+  //Serial.print(",");
+  //printEvent(&orientationData); //orientation
+  //Serial.print(",");
+  //printEvent(&angVelocityData); //GYRO
+  //Serial.print(",");
+  //printEvent(&linearAccelData); //acceleration2
+  //Serial.print(",");
+  //printEvent(&magnetometerData); //magnetic
+  //Serial.print(",");
+  //printEvent(&accelerometerData); //acceleration
+  //Serial.print(",");
+  //printEvent(&gravityData); //acceleration3
+  //Serial.print(",");
 
   int8_t boardTemp = bno.getTemp();
   Serial.println();
   //Serial.print(F("temperature: "));
   //Serial.println(boardTemp);
 
-  delay(10);
+  delay(1000);
 }
 
 void printEvent(sensors_event_t* event) {
@@ -64,45 +76,106 @@ void printEvent(sensors_event_t* event) {
     x = event->acceleration.x;
     y = event->acceleration.y;
     z = event->acceleration.z;
+    Serial.print("acceleration.x:");
+    Serial.print(x);
+    Serial.print(",");
+    Serial.print("acceleration.y:");
+    Serial.print(y);
+    Serial.print(",");
+    Serial.print("acceleration.z:");
+    Serial.print(z);
   }
   else if (event->type == SENSOR_TYPE_ORIENTATION) {
     x = event->orientation.x;
     y = event->orientation.y;
     z = event->orientation.z;
+    Serial.print("orientation.x:");
+    Serial.print(x);
+    Serial.print(",");
+    Serial.print("orientation.y:");
+    Serial.print(y);
+    Serial.print(",");
+    Serial.print("orientation.z:");
+    Serial.print(z);
   }
   else if (event->type == SENSOR_TYPE_MAGNETIC_FIELD) {
     x = event->magnetic.x;
     y = event->magnetic.y;
     z = event->magnetic.z;
+    Serial.print("magnetic.x:");
+    Serial.print(x);
+    Serial.print(",");
+    Serial.print("magnetic.y:");
+    Serial.print(y);
+    Serial.print(",");
+    Serial.print("magnetic.z:");
+    Serial.print(z);
   }
   else if (event->type == SENSOR_TYPE_GYROSCOPE) {
     x = event->gyro.x;
     y = event->gyro.y;
     z = event->gyro.z;
+    Serial.print("gyro.x:");
+    Serial.print(x);
+    Serial.print(",");
+    Serial.print("gyro.y:");
+    Serial.print(y);
+    Serial.print(",");
+    Serial.print("gyro.z:");
+    Serial.print(z);
   }
   else if (event->type == SENSOR_TYPE_ROTATION_VECTOR) {
     x = event->gyro.x;
     y = event->gyro.y;
     z = event->gyro.z;
+    Serial.print("gyro2.x:");
+    Serial.print(x);
+    Serial.print(",");
+    Serial.print("gyro2.y:");
+    Serial.print(y);
+    Serial.print(",");
+    Serial.print("gyro2.z:");
+    Serial.print(z);
   }
   else if (event->type == SENSOR_TYPE_LINEAR_ACCELERATION) {
     x = event->acceleration.x;
     y = event->acceleration.y;
     z = event->acceleration.z;
+    Serial.print("acceleration2.x:");
+    Serial.print(x);
+    Serial.print(",");
+    Serial.print("acceleration2.y:");
+    Serial.print(y);
+    Serial.print(",");
+    Serial.print("acceleration2.z:");
+    Serial.print(z);
   }
   else if (event->type == SENSOR_TYPE_GRAVITY) {
     x = event->acceleration.x;
     y = event->acceleration.y;
     z = event->acceleration.z;
+    Serial.print("acceleration3.x:");
+    Serial.print(x);
+    Serial.print(",");
+    Serial.print("acceleration3.y:");
+    Serial.print(y);
+    Serial.print(",");
+    Serial.print("acceleration3.z:");
+    Serial.print(z);
   }
   else {
     // do nothing
   }
 
   // print the values separated by commas
+  /*
+  Serial.print("Variable_1:");
   Serial.print(x);
   Serial.print(",");
+  Serial.print("Variable_2:");
   Serial.print(y);
   Serial.print(",");
+  Serial.print("Variable_3:");
   Serial.print(z);
+  */
 }
