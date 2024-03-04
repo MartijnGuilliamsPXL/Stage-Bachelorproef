@@ -44,10 +44,7 @@ void loop(void)
   bno.getEvent(&magnetometerData, Adafruit_BNO055::VECTOR_MAGNETOMETER);
   bno.getEvent(&accelerometerData, Adafruit_BNO055::VECTOR_ACCELEROMETER);
   bno.getEvent(&gravityData, Adafruit_BNO055::VECTOR_GRAVITY);
-  imu::Quaternion quat = bno.getQuat();
-  
-  Serial.print("quat:");
-  Serial.print(quat.w(), 4);
+
   //Serial.print(",");
   //printEvent(&orientationData); //orientation
   //Serial.print(",");
@@ -57,7 +54,7 @@ void loop(void)
   //Serial.print(",");
   //printEvent(&magnetometerData); //magnetic
   //Serial.print(",");
-  //printEvent(&accelerometerData); //acceleration
+  printEvent(&accelerometerData); //acceleration
   //Serial.print(",");
   //printEvent(&gravityData); //acceleration3
   //Serial.print(",");
