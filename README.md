@@ -128,6 +128,8 @@
 - Kick-off presentation afwerken
 
 ## Dinsdag
+- 8u tot 16u30 (0,5u pauze)
+- Testen en monteren loadcells
 
 ## Woensdag
 
