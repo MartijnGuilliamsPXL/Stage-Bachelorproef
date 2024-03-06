@@ -132,6 +132,10 @@
 - Testen en monteren loadcells
 
 ## Woensdag
+- 8u tot 16u30 (0,5u pauze)
+- Spanning en stroom meter testen om zo torque te kunnen verifiëren
+- Loadcells testen
+- Torque berekenen
 
 ## Donderdag
 
