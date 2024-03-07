@@ -138,5 +138,8 @@
 - Torque berekenen
 
 ## Donderdag
+- 8u tot 16u30 (0,5u pauze)
+- Torque verifiëren verder onderzoeken
+- Kick-off presentatie
 
 ## Vrijdag
