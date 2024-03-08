@@ -1,0 +1,2 @@
+feedback kick-off: 
+Rekening houden met metingen van de trillingen zoals sample frequentie.
