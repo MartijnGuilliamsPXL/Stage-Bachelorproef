@@ -117,9 +117,8 @@
 
 # Week 4
 ## Planning
-- [ ]	Opstelling afwerken
-- [ ]	Loadcells testen
-- [ ]   BNO055 code afwerken
+- [x]	Opstelling afwerken
+- [x]	Loadcells testen
 
 ## Maandag
 - 8u tot 16u30 (0,5u pauze)
@@ -143,3 +142,68 @@
 - Kick-off presentatie
 
 ## Vrijdag
+- 8u tot 16u30 (0,5u pauze)
+- Kooi rond test opstelling zetten
+- Sensoren plaatsen en kabelmanagement zodat niets in de propeller kan vliegen
+- Torque verifiëren verder onderzoeken
+
+# Week 5
+## Planning
+- [ ]	
+- [ ]	
+
+## Maandag
+- 
+
+## Dinsdag
+- 
+
+## Woensdag
+- 
+
+## Donderdag
+- 
+
+## Vrijdag
+- 
+
+# Week 6
+## Planning
+- [ ]	
+- [ ]	
+
+## Maandag
+- 
+
+## Dinsdag
+- 
+
+## Woensdag
+- 
+
+## Donderdag
+- 
+
+## Vrijdag
+- 
+
+# Week 7
+## Planning
+- [ ]	
+- [ ]	
+
+## Maandag
+- 
+
+## Dinsdag
+- 
+
+## Woensdag
+- 
+
+## Donderdag
+- 
+
+## Vrijdag
+- 
+
