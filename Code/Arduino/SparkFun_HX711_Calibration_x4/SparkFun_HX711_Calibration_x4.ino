@@ -72,7 +72,7 @@ void loop() {
   // Torque
   float force1_newtons = weight_kg3 * (9.81);
   float force2_newtons = weight_kg4 * (9.81);
-  float avgForce_newtons = (force1_newtons + force2_newtons) / 2;
+  float avgForce_newtons = (force1_newtons - force2_newtons) / 2;
   float torque_Nm = avgForce_newtons * 0.03365;
 
   //Serial.print("Scale1Thrust:");

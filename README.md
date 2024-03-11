@@ -155,6 +155,7 @@
 ## Maandag
 - 8u tot 16u30 (0,5u pauze)
 - Thrust & Torque metingen en berekeningen
+- IR sensor uitlezen oplossen
 
 ## Dinsdag
 - 
