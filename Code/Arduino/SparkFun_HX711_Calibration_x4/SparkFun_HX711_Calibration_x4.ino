@@ -67,16 +67,13 @@ void loop() {
   float weight_g4 = weight_kg4 * 1000; // Convert Kg to g
 
   // Thrust
-  float Thrust_N = (weight_g1 + weight_g2) * 9.81;
+  float Thrust_N = (weight_kg1 + weight_kg2) * 9.81;
 
   // Torque
   float force1_newtons = weight_kg3 * (9.81);
   float force2_newtons = weight_kg4 * (9.81);
   float avgForce_newtons = (force1_newtons + force2_newtons) / 2;
   float torque_Nm = avgForce_newtons * 0.03365;
-
-
-
 
   //Serial.print("Scale1Thrust:");
   //Serial.print(weight_g1, 1);
