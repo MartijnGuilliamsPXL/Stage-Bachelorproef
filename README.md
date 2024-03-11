@@ -149,11 +149,12 @@
 
 # Week 5
 ## Planning
-- [ ]	
-- [ ]	
+- [ ]	Thrust afwerken
+- [ ]	Torque afwerken
 
 ## Maandag
-- 
+- 8u tot 16u30 (0,5u pauze)
+- Thrust & Torque metingen en berekeningen
 
 ## Dinsdag
 - 

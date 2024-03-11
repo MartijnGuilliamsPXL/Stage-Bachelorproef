@@ -66,14 +66,13 @@ void loop() {
   float weight_g3 = weight_kg3 * 1000; // Convert Kg to g
   float weight_g4 = weight_kg4 * 1000; // Convert Kg to g
 
-  // Convert grams to Newtons
+  // Thrust
+  float Thrust_N = (weight_g1 + weight_g2) * 9.81;
+
+  // Torque
   float force1_newtons = weight_kg3 * (9.81);
   float force2_newtons = weight_kg4 * (9.81);
-
-  // Calculate average force
   float avgForce_newtons = (force1_newtons + force2_newtons) / 2;
-
-  // Calculate torque
   float torque_Nm = avgForce_newtons * 0.03365;
 
 
@@ -85,9 +84,15 @@ void loop() {
   //Serial.print("Scale2Thrust:");
   //Serial.print(weight_g2, 1);
 
+  /*
   Serial.print("Thrust:");
   Serial.print((weight_g1 + weight_g2), 1);
-  Serial.println(",");
+  Serial.print(",");
+  */
+
+  Serial.print("Thrust N:");
+  Serial.print(Thrust_N, 2);
+  Serial.print(",");
 
   /*
   Serial.print("Scale3Torque:");
