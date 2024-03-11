@@ -50,8 +50,12 @@ void loop() {
     {
       rpm = 0;
     }
+
+    if(rpm<15000)
+    {
+      Serial.println(rpm/2);
+    }
     
-    Serial.println(rpm/2);
     execute = false;
   }
 }
