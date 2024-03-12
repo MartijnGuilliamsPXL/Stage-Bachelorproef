@@ -158,7 +158,7 @@
 - IR sensor uitlezen oplossen
 
 ## Dinsdag
-- 
+- IR sensor uitlezen oplossen
 
 ## Woensdag
 - 
