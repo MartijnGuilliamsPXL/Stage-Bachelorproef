@@ -149,8 +149,8 @@
 
 # Week 5
 ## Planning
-- [ ]	Thrust afwerken
-- [ ]	Torque afwerken
+- [X]	Thrust afwerken
+- [X]	Torque afwerken
 
 ## Maandag
 - 8u tot 16u30 (0,5u pauze)
@@ -169,11 +169,15 @@
 - Labjack testcode schrijven
 
 ## Donderdag
-- 
-
+- 8u tot 16u30 (0,5u pauze)
+- Andere oplossingen onderzoeken voor RPM
+- Labjack testcode schrijven
+  
 ## Vrijdag
-- 
-
+- 8u tot 16u30 (0,5u pauze)
+- Bestelling nieuwe sensor
+- Labjack code voor stroom en spanning 
+  
 # Week 6
 ## Planning
 - [ ]	
