@@ -180,8 +180,8 @@
   
 # Week 6
 ## Planning
-- [ ]	
-- [ ]	
+- [ ]   Code omzetten van Arduino naar LabJack
+- [ ]   Blazor server opzetten voor website
 
 ## Maandag
 - 
