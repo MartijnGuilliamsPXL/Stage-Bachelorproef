@@ -176,18 +176,22 @@
 ## Vrijdag
 - 8u tot 16u30 (0,5u pauze)
 - Bestelling nieuwe sensor
-- Labjack code voor stroom en spanning 
+- Labjack code voor stroom en spanning
   
 # Week 6
 ## Planning
 - [ ]   Code omzetten van Arduino naar LabJack
-- [ ]   Blazor server opzetten voor website
+- [ ]   Communicatie arduino => LabJack
+- [X]   Blazor server opzetten voor website
+- [ ]   Grafieken weergeven uit csv
 
 ## Maandag
-- 
+- Code omzetten van Arduino naar LabJack
+- Blazor server opzetten voor website
 
 ## Dinsdag
-- 
+- Nieuwe RPM meter testen
+- Grafieken toevoegen 
 
 ## Woensdag
 - 
