@@ -186,12 +186,14 @@
 - [ ]   Grafieken weergeven uit csv
 
 ## Maandag
+- 8u tot 16u30 (0,5u pauze)
 - Code omzetten van Arduino naar LabJack
 - Blazor server opzetten voor website
 
 ## Dinsdag
+- 8u tot 16u30 (0,5u pauze)
 - Nieuwe RPM meter testen
-- Grafieken toevoegen 
+- Grafieken toevoegen in blazor project
 
 ## Woensdag
 - 

@@ -24,7 +24,7 @@ def readAio():
     with open(filename, mode='a', newline='') as csv_file:
         writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         writer.writerow([milliseconds, current, voltage])
-    bat = bat -1
+    #bat = bat -1
 
 
 def main():
@@ -34,7 +34,8 @@ def main():
     d.getCalibrationData()
     d.configIO(FIOAnalog = 0x03)
 
-    filename = time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".csv"
+    #filename = time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".csv"
+    filename = "voltage-current.csv"
 
     while (bat >= 0):
         _thread.start_new_thread(readAio, ())
