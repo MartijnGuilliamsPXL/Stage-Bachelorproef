@@ -2,6 +2,7 @@
 volatile unsigned long lastTime = 0; // Variable to store the last time a rotation was detected
 volatile unsigned int rpm = 0; // Variable to store calculated RPM
 unsigned long lastPrintTime = 0; // Variable to store the last time RPM was printed
+  pinMode(A0, INPUT_PULLUP);
 
 void setup() {
   Serial.begin(2400); // Initialize serial communication

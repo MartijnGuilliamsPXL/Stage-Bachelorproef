@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAQ-motor", "DAQ-motor\DAQ-motor.csproj", "{20ECE19E-6E22-4F62-B08A-38E475482D1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20ECE19E-6E22-4F62-B08A-38E475482D1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20ECE19E-6E22-4F62-B08A-38E475482D1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20ECE19E-6E22-4F62-B08A-38E475482D1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20ECE19E-6E22-4F62-B08A-38E475482D1E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E4566569-6FC1-4AB1-BEA2-F76BE2F59F94}
+	EndGlobalSection
+EndGlobal

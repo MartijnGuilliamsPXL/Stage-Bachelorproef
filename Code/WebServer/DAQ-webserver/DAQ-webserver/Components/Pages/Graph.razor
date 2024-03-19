@@ -1,0 +1,44 @@
+﻿<h3>Graph</h3>
+
+@page "/graph"
+
+@code {
+    private List<string> column1Data = new List<string>();
+    private List<string> column2Data = new List<string>();
+    private List<string> column3Data = new List<string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var csvFilePath = "C:/Users/marti/Documents/GitHub/Stage-Bachelorproef/Code/WebServer/DAQ-webserver/DAQ-webserver/wwwroot/sample-data/voltage-current.csv"; // Adjust path as needed
+        await ReadCsvFile(csvFilePath);
+    }
+
+    private async Task ReadCsvFile(string filePath)
+    {
+        System.Console.WriteLine("test");
+        try
+        {
+            using (var streamReader = new StreamReader(filePath))
+            {
+                while (!streamReader.EndOfStream)
+                {
+                    var line = await streamReader.ReadLineAsync();
+                    var values = line.Split(','); // Adjust delimiter as needed
+
+                    if (values.Length >= 2)
+                    {
+                        column1Data.Add(values[0]);
+                        column2Data.Add(values[1]);
+                        column3Data.Add(values[2]);
+                        // Add additional lists for other columns if needed
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // Handle exception (e.g., file not found, parsing error)
+            Console.WriteLine($"Error reading CSV file: {ex.Message}");
+        }
+    }
+}

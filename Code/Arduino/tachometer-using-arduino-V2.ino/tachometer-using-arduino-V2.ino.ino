@@ -9,6 +9,7 @@ volatile unsigned long rpm = 0;
 
 void setup() {
   Serial.begin(115200);
+  pinMode(2, INPUT_PULLUP);
   attachInterrupt(0, rpm_measure, FALLING); // interrupt 0 is on pin 2
   lastTime = 0;
   currentTime = 0;

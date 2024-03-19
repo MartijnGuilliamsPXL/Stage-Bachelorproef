@@ -1,0 +1,52 @@
+﻿@page "/grafanadashboard"
+@inject IWebHostEnvironment _env
+@using Newtonsoft.Json.Linq
+@using System.IO
+@using System.Text.Json
+
+<h3>Grafana Dashboard</h3>
+
+<iframe src="http://localhost:3000/d-solo/edg0xrt5xs2dcb/dashboard?orgId=1&from=1710744880793&to=1710766480793&panelId=1" width="450" height="200" frameborder="0"></iframe>
+
+@code {
+    private JObject _dashboard;
+    private Random _random = new Random();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _dashboard = await LoadDashboardAsync();
+        FillDashboardWithRandomData(_dashboard);
+        // Now you can use the '_dashboard' object to render your dashboard
+    }
+
+    public async Task<JObject> LoadDashboardAsync()
+    {
+        var jsonFilePath = Path.Combine(_env.WebRootPath, "dashboard.json");
+        var json = await System.IO.File.ReadAllTextAsync(jsonFilePath);
+        return JObject.Parse(json);
+    }
+
+    public void FillDashboardWithRandomData(JObject dashboard)
+    {
+        foreach (var panel in dashboard["panels"])
+        {
+            foreach (var target in panel["targets"])
+            {
+                var data = GenerateRandomData(100);
+                target["data"] = JArray.FromObject(data);
+            }
+        }
+    }
+
+    public List<double> GenerateRandomData(int count)
+    {
+        var data = new List<double>();
+
+        for (int i = 0; i < count; i++)
+        {
+            data.Add(_random.NextDouble() * 100);
+        }
+
+        return data;
+    }
+}
