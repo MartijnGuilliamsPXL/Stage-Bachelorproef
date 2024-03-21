@@ -1,0 +1,163 @@
+﻿@page "/chart"
+@rendermode InteractiveServer
+
+<PageTitle>Chart</PageTitle>
+
+<h3>Chart</h3>
+
+@using Plotly.Blazor
+@using Plotly.Blazor.Traces
+@using Plotly.Blazor.LayoutLib
+@using System.Timers
+@using System.Globalization;
+
+<PlotlyChart @bind-Data="data" @bind-Layout="layout" @ref="chart" />
+
+@code {
+    private PlotlyChart chart;
+    private IList<ITrace> data = new List<ITrace>();
+    private Layout layout = new Layout();
+    private Timer timer;
+    private bool firstRender = true;
+    int lastProcessedLine = 0;
+
+    private List<double> column1Data = new List<double>();
+    private List<double> column2Data = new List<double>();
+    private List<double> column3Data = new List<double>();
+
+    protected override void OnInitialized()
+    {
+        ReadCsvFile("C:/Users/marti/Documents/GitHub/Stage-Bachelorproef/voltage-current.csv");
+
+        // Initialize the line chart with some data
+        var scatter1 = new Scatter
+            {
+                X = column1Data.Cast<object>().ToList(),
+                Y = column2Data.Cast<object>().ToList(),
+                //Name = "yaxis data"
+            };
+        data.Add(scatter1);
+
+        var scatter2 = new Scatter
+            {
+                X = column1Data.Cast<object>().ToList(),
+                Y = column3Data.Cast<object>().ToList(),
+                //Name = "yaxis2 data",
+                //YAxis = "y2"
+            };
+        data.Add(scatter2);
+
+
+        // Set up a timer to add data every second
+        timer = new Timer(1000);
+        timer.Elapsed += AddData;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            this.firstRender = false;
+            timer.Start();
+        }
+    }
+
+    private async void AddData(object sender, ElapsedEventArgs e)
+    {
+        ReadCsvFile("C:/Users/marti/Documents/GitHub/Stage-Bachelorproef/voltage-current.csv");
+        /*
+        var random = new Random();
+
+        if (chart.Data[0] is Scatter scatter1)
+        {
+        scatter1.X.Add(scatter1.X.Count + 1);
+        scatter1.Y.Add(random.NextDouble());
+        }
+
+    if (chart.Data[1] is Scatter scatter2)
+        {
+        scatter2.X.Add(scatter2.X.Count + 1);
+        scatter2.Y.Add(random.NextDouble());
+    }*/
+
+        if (chart.Data[0] is Scatter scatter1)
+        {
+            for (int i = 0; i < column1Data.Count; i++)
+            {
+                scatter1.X.Add(column1Data[i]);
+                scatter1.Y.Add(column2Data[i]);
+            }
+        }
+
+        if (chart.Data[1] is Scatter scatter2)
+        {
+            for (int i = 0; i < column1Data.Count; i++)
+            {
+                scatter2.X.Add(column1Data[i]);
+                scatter2.Y.Add(column3Data[i]);
+            } 
+        }
+
+        // Update the chart
+        try 
+        {
+            await InvokeAsync(() => chart.Update());
+        }
+        catch
+        {
+            Console.WriteLine("oei");
+        }
+
+    }
+
+    private void ReadCsvFile(string filePath)
+    {
+        column1Data.Clear();
+        column2Data.Clear();
+        column3Data.Clear();
+        try
+        {
+            using (var streamReader = new StreamReader(filePath))
+            {
+                bool isFirstLine = true; // Flag to identify the first line
+                double baseValue = 0;
+
+                while (!streamReader.EndOfStream)
+                {
+                    var line = streamReader.ReadLine();
+                    var values = line.Split(','); // Assuming CSV is comma-separated
+
+
+                    if (values.Length >= 3)
+                    {
+                        // Adding data to respective columns
+                        column1Data.Add(double.Parse(values[0], CultureInfo.InvariantCulture));
+                        column2Data.Add(double.Parse(values[1], CultureInfo.InvariantCulture));
+                        column3Data.Add(double.Parse(values[2], CultureInfo.InvariantCulture));
+
+                        // If it's the first line, set the base value for subtraction
+                        if (isFirstLine)
+                        {
+                            baseValue = column1Data[0];
+                            isFirstLine = false;
+                        }
+                        else
+                        {
+                            // Subtracting the base value from the current value and updating column1Data
+                            double currentValue = column1Data[column1Data.Count - 1];
+                            column1Data[column1Data.Count - 1] = currentValue - baseValue;
+                        }
+                    }
+                }
+                column1Data[0] = 0;
+                lastProcessedLine = column1Data.Count - 1;
+                Console.WriteLine(lastProcessedLine);
+
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error reading CSV file: {ex.Message}");
+        }
+    }
+}

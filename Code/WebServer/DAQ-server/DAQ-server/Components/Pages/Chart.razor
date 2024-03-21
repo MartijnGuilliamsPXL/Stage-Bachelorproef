@@ -1,0 +1,145 @@
+﻿@page "/chart"
+@rendermode InteractiveServer
+@using System.Globalization;
+@using System.Timers
+
+<PageTitle>Chart</PageTitle>
+
+<h1>Chart</h1>
+
+<Button OnClick="AppendData" BackgroundColor=TablerColor.Primary>Append Data</Button>
+
+<ApexChart @ref=chart TItem="MyData"
+           Title="Sample Data">
+
+    <ApexPointSeries TItem="MyData"
+                     Items="Data"
+                     Name="Net Profit"
+                     SeriesType="SeriesType.Line"
+                     XValue="e => e.Time"
+                     YValue="e=> e.Current" />
+
+    <ApexPointSeries TItem="MyData"
+                     Items="Data"
+                     Name="Revenue"
+                     SeriesType="SeriesType.Line"
+                     XValue="e => e.Time"
+                     YValue="e=> e.Voltage" />
+</ApexChart>
+
+
+
+@code {
+    private ApexChart<MyData> chart = new ApexChart<MyData>();
+    private List<MyData> Data { get; set; } = new List<MyData>();
+    private List<double> column1Data = new List<double>();
+    private List<double> column2Data = new List<double>();
+    private List<double> column3Data = new List<double>();
+    int lastProcessedLine = 0;
+    // Timer for refreshing the graph
+    Timer timer;
+
+    protected override void OnInitialized()
+    {
+        ReadCsvFile("C:/Users/marti/Documents/GitHub/Stage-Bachelorproef/voltage-current.csv");
+
+        // Initialize the timer
+        timer = new Timer(5000); // Set the interval to 1000 milliseconds (1 second)
+        timer.Elapsed += OnTimerElapsed;
+        timer.AutoReset = true;
+        timer.Enabled = true;
+
+        for (var i = 0; i < column1Data.Count; i++)
+        {
+            Data.Add(new MyData { Time = column1Data[i].ToString(), Current = ((decimal)column2Data[i]), Voltage = ((decimal)column3Data[i]) });
+        }
+
+        //Data.Add(new MyData { Category = "Jan", NetProfit = 12, Revenue = 33 });
+        //Data.Add(new MyData { Category = "Feb", NetProfit = 43, Revenue = 42 });
+        //Data.Add(new MyData { Category = "Mar", NetProfit = 112, Revenue = 23 });
+    }
+
+    public class MyData
+    {
+        public string Time { get; set; }
+        public decimal Current { get; set; }
+        public decimal Voltage { get; set; }
+    }
+
+    // Method to handle timer elapsed event
+    private void OnTimerElapsed(object sender, ElapsedEventArgs e)
+    {
+        Console.WriteLine("OK");
+        // Invoke the state has changed to trigger UI update
+        //Data.Add(new MyData { Time = "50000000000", Current = 50000000000, Voltage = 50000000000 });
+        InvokeAsync(StateHasChanged);
+
+        AppendData();
+    }
+
+    private void ReadCsvFile(string filePath)
+    {
+        //column1Data.Clear();
+        //column2Data.Clear();
+        //column3Data.Clear();
+        try
+        {
+            using (var streamReader = new StreamReader(filePath))
+            {
+                bool isFirstLine = true; // Flag to identify the first line
+                double baseValue = 0;
+
+                while (!streamReader.EndOfStream)
+                {
+                    var line = streamReader.ReadLine();
+                    var values = line.Split(','); // Assuming CSV is comma-separated
+
+                    if (values.Length >= 3)
+                    {
+                        // Adding data to respective columns
+                        column1Data.Add(double.Parse(values[0], CultureInfo.InvariantCulture));
+                        column2Data.Add(double.Parse(values[1], CultureInfo.InvariantCulture));
+                        column3Data.Add(double.Parse(values[2], CultureInfo.InvariantCulture));
+
+                        // If it's the first line, set the base value for subtraction
+                        if (isFirstLine)
+                        {
+                            baseValue = column1Data[0];
+                            isFirstLine = false;
+                        }
+                        else
+                        {
+                            // Subtracting the base value from the current value and updating column1Data
+                            double currentValue = column1Data[column1Data.Count - 1];
+                            column1Data[column1Data.Count - 1] = currentValue - baseValue;
+                        }
+                    }
+                }
+                lastProcessedLine = column1Data.Count - 1;
+                column1Data[0] = 0;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error reading CSV file: {ex.Message}");
+        }
+    }
+
+    private async Task AppendData()
+    {
+        Console.WriteLine("OOOOOOOOOK");
+        var max = Data.Max(e => e.Time);
+        var rnd = new Random();
+
+        var newData = new List<MyData>();
+        for (var i = 1; i <= 10; i++)
+        {
+            newData.Add(new MyData { Time = (rnd.Next(45000, 90000)).ToString(), Current = rnd.Next(1, 20), Voltage = rnd.Next(1, 100) });
+        }
+        Console.WriteLine(newData.GetType());
+        Data.AddRange(newData);
+        Console.WriteLine(newData.GetType());
+        
+        await chart.AppendDataAsync(newData);
+    }
+}

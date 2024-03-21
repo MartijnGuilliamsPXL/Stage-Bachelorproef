@@ -196,10 +196,13 @@
 - Grafieken toevoegen in blazor project
 
 ## Woensdag
-- 
+- 8u15 tot 16u45 (0,5u pauze)
+- Grafieken toevoegen in blazor project met live-data
 
 ## Donderdag
-- 
+- 8u tot 16u30 (0,5u pauze)
+- Grafieken toevoegen in blazor project met live-data
+- Data inlezen samenvoegen en sample frequentie instellen
 
 ## Vrijdag
 - 

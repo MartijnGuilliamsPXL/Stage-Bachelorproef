@@ -4,11 +4,12 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>DATA-Visualisatie</RootNamespace>
+    <AssemblyName>$(AssemblyName.Replace(' ', '_'))</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Plotly.Blazor" Version="4.2.0" />
-    <PackageReference Include="PSC.Blazor.Components.Chartjs" Version="7.0.1" />
   </ItemGroup>
 
 </Project>
