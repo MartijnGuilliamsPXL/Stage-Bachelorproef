@@ -2,7 +2,7 @@
 // Read voltage and current values from the sensor
 
 const int voltagePin = A1; // Analog pin for voltage output
-const int currentPin = A0; // Analog pin for current output
+const int currentPin = A2; // Analog pin for current output
 
 int potPinIN = A5;
 int potPinOUT = 10;
@@ -21,10 +21,10 @@ void loop() {
 
   // Print values to serial monitor
   Serial.print("Voltage (V):");
-  Serial.print(voltageRaw * 0.070769230769); // Display with 2 decimal places
+  Serial.print(voltageRaw * 0.0503861788617886); // Display with 2 decimal places * 0.0503861788617886
   Serial.print(",");
   Serial.print("Current (A):");
-  Serial.println(currentRaw * 0.1461111); // Display with 2 decimal places
+  Serial.println(currentRaw * 0.0571428571428571); // Display with 2 decimal places * 0.0571428571428571
 
   
   potVal = analogRead(potPinIN);   // read the potentiometer value at the input pin

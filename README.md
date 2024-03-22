@@ -205,7 +205,8 @@
 - Data inlezen samenvoegen en sample frequentie instellen
 
 ## Vrijdag
-- 
+- 8u tot 16u30 (0,5u pauze)
+- Data inlezen samenvoegen en sample frequentie instellen
 
 # Week 7
 ## Planning

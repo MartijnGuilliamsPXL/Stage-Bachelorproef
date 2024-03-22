@@ -1,12 +1,12 @@
-using DAQ_website.Components;
+using WebServer.Components;
+using WebServer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddBlazorBootstrap(); // Add this line
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
 
 builder.Services.AddSingleton<BackgroundTaskService>();
 builder.Services.AddHostedService(provider => provider.GetService<BackgroundTaskService>());

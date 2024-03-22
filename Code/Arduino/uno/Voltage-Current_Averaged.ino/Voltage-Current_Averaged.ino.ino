@@ -1,5 +1,5 @@
 const int voltagePin = A1; // Analog pin for voltage output
-const int currentPin = A0; // Analog pin for current output
+const int currentPin = A2; // Analog pin for current output
 
 int potPinIN = A5;
 int potPinOUT = 10;
