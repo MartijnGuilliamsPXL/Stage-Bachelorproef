@@ -180,10 +180,11 @@
   
 # Week 6
 ## Planning
-- [ ]   Code omzetten van Arduino naar LabJack
-- [ ]   Communicatie arduino => LabJack
 - [X]   Blazor server opzetten voor website
-- [ ]   Grafieken weergeven uit csv
+- [X]   Seriële poort uitlezen in blazor 
+- [X]   Nieuwe RPM sensor testen
+- [X]   Grafiek tekenen
+- [ ]   Live data op grafiek weergeven
 
 ## Maandag
 - 8u tot 16u30 (0,5u pauze)
@@ -207,10 +208,11 @@
 ## Vrijdag
 - 8u tot 16u30 (0,5u pauze)
 - Data inlezen samenvoegen en sample frequentie instellen
+- Verder werken website
 
 # Week 7
 ## Planning
-- [ ]	
+- [ ]   Live data op grafiek weergeven	
 - [ ]	
 
 ## Maandag

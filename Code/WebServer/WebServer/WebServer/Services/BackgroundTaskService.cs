@@ -1,8 +1,6 @@
-﻿using System;
+﻿using System.Globalization;
 using System.IO.Ports;
-using System.Net.NetworkInformation;
 using WebServer.Models;
-using System.Globalization;
 
 namespace WebServer.Services
 {

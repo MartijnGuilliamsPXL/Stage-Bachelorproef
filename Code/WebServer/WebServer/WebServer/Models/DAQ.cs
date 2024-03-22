@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace WebServer.Models
+﻿namespace WebServer.Models
 {
     class DAQ
     {
@@ -14,7 +12,7 @@ namespace WebServer.Models
         { get; set; }
         public double Voltage
         { get; set; }
-        public double Current 
+        public double Current
         { get; set; }
     }
 }
