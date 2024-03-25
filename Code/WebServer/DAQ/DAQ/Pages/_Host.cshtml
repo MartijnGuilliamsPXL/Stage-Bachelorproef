@@ -1,0 +1,10 @@
+﻿@page "/"
+@namespace DAQ.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+
+<script src="_content/PSC.Blazor.Components.Chartjs/lib/Chart.js/chart.js"></script>
+<script src="_content/PSC.Blazor.Components.Chartjs/Chart.js" type="module"></script>
+<component type="typeof(App)" render-mode="ServerPrerendered" />

@@ -1,0 +1,81 @@
+﻿@page "/charts"
+
+<h3>Line Simple</h3>
+
+<button @onclick="AddValue">Add value</button>
+<Chart Config="_config1" @ref="_chart1" Height="400px"></Chart>
+
+
+@code {
+    private LineChartConfig? _config1;
+    private Chart? _chart1;
+    public static List<string> PaletteBorder1 = new List<string>()
+        {
+            "rgb(255, 99, 132)",
+            "rgb(255, 159, 64)",
+            "rgb(255, 205, 86)",
+            "rgb(75, 192, 192)",
+            "rgb(54, 162, 235)",
+            "rgb(153, 102, 255)",
+            "rgb(201, 203, 207)"
+        };
+    public static List<string> SimpleLineText = new List<string>() { "0", "1", "2", "3", "4", "5", "6" };
+    public static List<decimal?> SimpleLine = new List<decimal?>() { 65, 59, 80, 81, 86, 55, 40 };
+    public static List<decimal?> SimpleLine2 = new List<decimal?>() { 33, 25, 35, 51, 54, 76, 60 };
+    public static List<decimal?> SimpleLine3 = new List<decimal?>() { 53, 91, 39, 61, 39, 87, 23 };
+
+    protected override async Task OnInitializedAsync()
+    {
+        _config1 = new LineChartConfig()
+        {
+            Options = new Options()
+            {
+                RegisterDataLabels = true,
+                Plugins = new Plugins()
+                {
+                    DataLabels = new DataLabels()
+                    {
+                        Align = DatalabelsAlign.Start,
+                        Anchor = DatalabelsAnchor.Start,
+                    }
+                }
+            }
+        };
+
+        _config1.Data.Labels = SimpleLineText;
+        _config1.Data.Datasets.Add(new LineDataset()
+            {
+                Label = "Line 1",
+                Data = SimpleLine.ToList(),
+                BorderColor = PaletteBorder1.FirstOrDefault(),
+                Tension = 0.1M,
+                Fill = false,
+                //PointRadius= 15,
+                PointStyle = PointStyle.Circle
+            });
+        _config1.Data.Datasets.Add(new LineDataset()
+            {
+                Label = "Line 2",
+                Data = SimpleLine2.ToList(),
+                BorderColor = PaletteBorder1.Skip(1).FirstOrDefault(),
+                DataLabels = new DataLabels()
+                {
+                    BackgroundColor = PaletteBorder1.Skip(1).FirstOrDefault(),
+                    BorderRadius = 4,
+                    Color = "white",
+                    Font = new Font()
+                    {
+                        Weight = "bold"
+                    },
+                    Padding = new Padding(6)
+                }
+            });
+    }
+    private void AddValue()
+    {
+        Random rd = new Random();
+        _chart1.AddData(new List<string?>() { $"{DateTime.Now}" }, 0, new List<decimal?>() { rd.Next(0, 200) });
+        _chart1.AddData(null, 1, new List<decimal?>() { rd.Next(0, 200) });
+        //_chart1.AddData(null, 2, new List<decimal?>() { rd.Next(0, 200) });
+    }
+}

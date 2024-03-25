@@ -212,11 +212,15 @@
 
 # Week 7
 ## Planning
-- [ ]   Live data op grafiek weergeven	
-- [ ]	
+- [ ]   Live data op grafiek weergeven
+- [ ]   Trillingen
+- [ ]	Fase 1 afwerken
+- [ ]   PXL promotor uitnodigen
 
 ## Maandag
-- 
+- 8u tot 16u30 (0,5u pauze)
+- Live data op grafiek weergeven
+- Fase 1 afwerken
 
 ## Dinsdag
 - 

@@ -4,8 +4,10 @@ using System.IO.Ports;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using DAQ.Models;
+using System.Globalization;
 
-namespace WebServer.Services
+namespace DAQ.Services
 {
     public class BackgroundTaskService : BackgroundService
     {
@@ -26,6 +28,7 @@ namespace WebServer.Services
 
             while (!cancellationToken.IsCancellationRequested)
             {
+                Models.Data myObj = new Models.Data();
                 try
                 {
                     int bytesRead = await _serialPort.BaseStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
@@ -43,6 +46,15 @@ namespace WebServer.Services
                             _receivedDataBuffer.Remove(0, newlineIndex + Environment.NewLine.Length);
 
                             Console.WriteLine($"Received: {message}");
+                            var values = message.Split(',');
+                            // Split the string by ":"
+                            var parts = values[4].Split(':');
+                            myObj.Voltage = double.Parse(parts[1], CultureInfo.InvariantCulture);
+
+
+                            //Console.WriteLine($"Received: {values[4]}");
+                            //Console.WriteLine($"Received: {myObj.Voltage}");
+                            //Console.WriteLine($"Received: {dataline}");
 
                             // Calculate frequency or perform other operations here
                         }
