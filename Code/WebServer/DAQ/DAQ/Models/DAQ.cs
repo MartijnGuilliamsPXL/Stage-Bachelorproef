@@ -4,11 +4,11 @@
     {
         public DateTime Time { get; set; }
         public int RPM { get; set; }
-        public double Temperature { get; set; }
-        public double ThrustN { get; set; }
-        public double TorqueNm { get; set; }
-        public double VoltageV { get; set; }
-        public double CurrentA { get; set; }
+        public decimal Temperature { get; set; }
+        public decimal ThrustN { get; set; }
+        public decimal TorqueNm { get; set; }
+        public decimal VoltageV { get; set; }
+        public decimal CurrentA { get; set; }
     }
 
 }

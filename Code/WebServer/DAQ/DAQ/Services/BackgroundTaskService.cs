@@ -12,10 +12,12 @@ namespace DAQ.Services
 {
     public class BackgroundTaskService : BackgroundService
     {
+        public event Action TimerElapsed;
         private SerialPort _serialPort;
         private StringBuilder _receivedDataBuffer = new StringBuilder();
-        List<DataPoint> buffer = new List<DataPoint>(); // Buffer list to store data temporarily
-        System.Timers.Timer timer;
+        public List<DataPoint> buffer = new List<DataPoint>(); // Buffer list to store data temporarily
+        public System.Timers.Timer timer;
+        public bool addValues = false;
 
         public BackgroundTaskService()
         {
@@ -24,7 +26,7 @@ namespace DAQ.Services
             _serialPort.Open();
             Console.WriteLine("Created SerialService");
 
-            timer = new System.Timers.Timer(1000); // Set the interval to 1000 milliseconds (1 second)
+            timer = new System.Timers.Timer(100); // Set the interval to 1000 milliseconds (1 second)
             timer.Elapsed += OnTimerElapsed;
             timer.AutoReset = true;
             timer.Enabled = true;
@@ -95,11 +97,11 @@ namespace DAQ.Services
                 DataPoint newDataPoint = new DataPoint();
                 newDataPoint.Time = DateTime.ParseExact(parts[0], "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                 newDataPoint.RPM = int.Parse(parts[1].Split(':')[1]);
-                newDataPoint.Temperature = double.Parse(parts[2].Split(':')[1], CultureInfo.InvariantCulture);
-                newDataPoint.ThrustN = double.Parse(parts[3].Split(':')[1], CultureInfo.InvariantCulture);
-                newDataPoint.TorqueNm = double.Parse(parts[4].Split(':')[1], CultureInfo.InvariantCulture);
-                newDataPoint.VoltageV = double.Parse(parts[5].Split(':')[1], CultureInfo.InvariantCulture);
-                newDataPoint.CurrentA = double.Parse(parts[6].Split(':')[1], CultureInfo.InvariantCulture);
+                newDataPoint.Temperature = decimal.Parse(parts[2].Split(':')[1], CultureInfo.InvariantCulture);
+                newDataPoint.ThrustN = decimal.Parse(parts[3].Split(':')[1], CultureInfo.InvariantCulture);
+                newDataPoint.TorqueNm = decimal.Parse(parts[4].Split(':')[1], CultureInfo.InvariantCulture);
+                newDataPoint.VoltageV = decimal.Parse(parts[5].Split(':')[1], CultureInfo.InvariantCulture);
+                newDataPoint.CurrentA = decimal.Parse(parts[6].Split(':')[1], CultureInfo.InvariantCulture);
 
                 buffer.Add(newDataPoint);
             }
@@ -117,35 +119,19 @@ namespace DAQ.Services
                         await writer.WriteLineAsync($"{point.Time};{point.RPM};{point.Temperature};{point.ThrustN};{point.TorqueNm};{point.VoltageV};{point.CurrentA}");
                     }
                 }
+                Console.WriteLine("buffer.Clear");
                 buffer.Clear(); // Clear the buffer after data is saved
             }
             //string dataToSend = "1200";
             //_serialPort.WriteLine(dataToSend);
         }
 
-        private void UpdateChart()
-        {
-            if (buffer.Count > 0)
-            {
-                
-                foreach (var point in buffer)
-                {
-                    //await writer.WriteLineAsync($"{point.Time};{point.RPM};{point.Temperature};{point.ThrustN};{point.TorqueNm};{point.VoltageV};{point.CurrentA}");
-                    //Random rd = new Random();
-                    //_chart1.AddData(new List<string?>() { $"{DateTime.Now}" }, 0, new List<decimal?>() { rd.Next(0, 200) });
-                    //_chart1.AddData(null, 1, new List<decimal?>() { rd.Next(0, 200) });
-                }
-               
-                 // Clear the buffer after data is saved
-            }
-        }
-
         private void OnTimerElapsed(object sender, ElapsedEventArgs e)
         {
-            Console.WriteLine("OK");
+            TimerElapsed?.Invoke();
             SaveBufferToCSV();
-            UpdateChart();
-            buffer.Clear();
+            //UpdateChart();
+            //buffer.Clear();
         }
 
     }

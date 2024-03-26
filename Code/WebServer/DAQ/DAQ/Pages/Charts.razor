@@ -14,11 +14,14 @@
 @using PSC.Blazor.Components.Chartjs.Models.Scatter
 @using System.Globalization;
 @using System.IO.Ports;
+@using System.Timers;
+@inject DAQ.Services.BackgroundTaskService BackgroundService
 
 <h3>Line Simple</h3>
 
 <button @onclick="AddValue">Add value</button>
-<Chart Config="_config1" @ref="_chart1" Height="400px"></Chart>
+<Chart Config="_config0" @ref="Voltage" Height="400px"></Chart>
+<Chart Config="_config1" @ref="Current" Height="400px"></Chart>
 <button @onclick="SendData">Send Data to COM4</button>
 
 
@@ -26,10 +29,16 @@
     private List<String> time = new List<String>();
     private List<decimal?> voltage = new List<decimal?>();
     private List<decimal?> current = new List<decimal?>();
+    private LineChartConfig? _config0;
     private LineChartConfig? _config1;
-    private Chart? _chart1;
+    private Chart? Voltage;
+    private Chart? Current;
+    System.Timers.Timer timer;
+    public List<DataPoint> temp = new List<DataPoint>();
+    //private int elapsedSeconds;
 
-    
+
+
     //private int i = 0;
     public static List<string> PaletteBorder1 = new List<string>()
         {
@@ -51,8 +60,17 @@
 
     protected override async Task OnInitializedAsync()
     {
+        //BackgroundService.UpdateChart();
         ReadCsvFile("C:/Users/marti/Documents/GitHub/Stage-Bachelorproef/Code/WebServer/DAQ/DAQ/data.csv");
-        _config1 = new LineChartConfig()
+        //timer = new System.Timers.Timer(1000); // Set the interval to 1000 milliseconds (1 second)
+        //timer.Elapsed += OnTimerElapsed;
+        //timer.AutoReset = true;
+        //timer.Enabled = true;
+
+        BackgroundService.TimerElapsed += OnTimerElapsed;
+
+
+        _config0 = new LineChartConfig()
         {
             Options = new Options()
             {
@@ -68,8 +86,8 @@
             }
         };
 
-        _config1.Data.Labels = time;
-        _config1.Data.Datasets.Add(new LineDataset()
+        _config0.Data.Labels = time;
+        _config0.Data.Datasets.Add(new LineDataset()
             {
                 Label = "Voltage",
                 Data = voltage,
@@ -79,29 +97,42 @@
                 //PointRadius= 15,
                 PointStyle = PointStyle.Circle
             });
+
+        _config1 = new LineChartConfig()
+            {
+                Options = new Options()
+                {
+                    RegisterDataLabels = true,
+                    Plugins = new Plugins()
+                    {
+                        DataLabels = new DataLabels()
+                        {
+                            Align = DatalabelsAlign.Start,
+                            Anchor = DatalabelsAnchor.Start,
+                        }
+                    }
+                }
+            };
+
+        _config1.Data.Labels = time;
         _config1.Data.Datasets.Add(new LineDataset()
             {
                 Label = "Current",
                 Data = current,
-                BorderColor = PaletteBorder1.Skip(1).FirstOrDefault(),
-                DataLabels = new DataLabels()
-                {
-                    BackgroundColor = PaletteBorder1.Skip(1).FirstOrDefault(),
-                    BorderRadius = 4,
-                    Color = "white",
-                    Font = new Font()
-                    {
-                        Weight = "bold"
-                    },
-                    Padding = new Padding(6)
-                }
+                BorderColor = PaletteBorder1.FirstOrDefault(),
+                Tension = 0.1M,
+                Fill = false,
+                //PointRadius= 15,
+                PointStyle = PointStyle.Circle
             });
+
     }
-    private void AddValue()
+    public void AddValue()
     {
-        Random rd = new Random();
-        _chart1.AddData(new List<string?>() { $"{DateTime.Now}" }, 0, new List<decimal?>() { rd.Next(0, 20) });
-        _chart1.AddData(null, 1, new List<decimal?>() { rd.Next(0, 20) });
+        Console.WriteLine("OK OK");
+        //Random rd = new Random();
+        //Voltage.AddData(new List<string?>() { $"{DateTime.Now}" }, 0, new List<decimal?>() { rd.Next(0, 20) });
+        //Voltage.AddData(null, 1, new List<decimal?>() { rd.Next(0, 20) });
     }
 
     private void ReadCsvFile(string filePath)
@@ -137,30 +168,57 @@
         }
     }
 
-    
-
-    @code {
     private SerialPort _serialPort;
 
-        private void SendData()
+    private void SendData()
+    {
+        try
         {
-            try
-            {
-                _serialPort = new SerialPort("COM4", 115200);
-                _serialPort.Open();
+            _serialPort = new SerialPort("COM4", 115200);
+            _serialPort.Open();
 
-                // Example: Send "Hello, World!" to COM4
-                string dataToSend = "1200";
-                _serialPort.Write(dataToSend);
+            // Example: Send "Hello, World!" to COM4
+            string dataToSend = "1200";
+            _serialPort.Write(dataToSend);
 
-                // Close the port when done
-                _serialPort.Close();
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions (e.g., port not available, permission issues)
-                Console.WriteLine($"Error: {ex.Message}");
-            }
+            // Close the port when done
+            _serialPort.Close();
         }
+        catch (Exception ex)
+        {
+            // Handle exceptions (e.g., port not available, permission issues)
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+
+    private void createCharts(LineChartConfig? config, string label, List<Decimal> data)
+    {
+
+    }
+
+    public void UpdateChart()
+    {
+        Console.WriteLine("OKOKOK");
+        if (temp.Count > 0)
+        {
+            //Console.WriteLine($"temp: {temp}");
+            foreach (var point in temp)
+            {
+                //await writer.WriteLineAsync($"{point.Time};{point.RPM};{point.Temperature};{point.ThrustN};{point.TorqueNm};{point.VoltageV};{point.CurrentA}");
+                //Random rd = new Random();
+                Voltage.AddData(new List<string?>() {point.Time.ToString()}, 0, new List<decimal?>() {point.VoltageV});
+                Current.AddData(new List<string?>() {point.Time.ToString()}, 0, new List<decimal?>() { point.CurrentA });
+            }
+            temp.Clear();
+        }
+    }
+
+    private void OnTimerElapsed()
+    {
+        temp = BackgroundService.buffer;
+        Console.WriteLine("test");
+        UpdateChart();
+        //UpdateChart();
+        //buffer.Clear();
     }
 }
