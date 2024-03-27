@@ -2,11 +2,15 @@
 using System;
 using System.IO.Ports;
 using System.Text;
-using DAQ.Models;
+using BlazorApp5.Models;
 using System.Globalization;
+using System.Drawing;
 using System.Timers;
+using PSC.Blazor.Components.Chartjs.Models.Bar;
+using PSC.Blazor.Components.Chartjs.Models.Common;
+using System.Diagnostics.Tracing;
 
-namespace DAQ.Services
+namespace BlazorApp5.Services
 {
     public class BackgroundTaskService : BackgroundService
     {
@@ -15,8 +19,8 @@ namespace DAQ.Services
         private StringBuilder _receivedDataBuffer = new StringBuilder();
         public List<DataPoint> buffer = new List<DataPoint>(); // Buffer list to store data temporarily
         public DataPoint Data = new DataPoint();
-        //public System.Timers.Timer? timer;
-        //public bool addValues = false;
+        public System.Timers.Timer? timer;
+        public bool addValues = false;
         private int count = 0;
 
         public BackgroundTaskService()
@@ -54,7 +58,15 @@ namespace DAQ.Services
 
                             Console.WriteLine($"Received: {message}");
                             ParseAndAddData(message);
-                            TimerElapsed?.Invoke();
+                            try
+                            {
+                                TimerElapsed?.Invoke();
+                            }
+                            catch(Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
+                            
                             await SaveBufferToCSV();
                             count++;
 

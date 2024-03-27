@@ -1,4 +1,4 @@
-﻿namespace DAQ.Models
+﻿namespace BlazorApp5.Models
 {
     public class DataPoint
     {

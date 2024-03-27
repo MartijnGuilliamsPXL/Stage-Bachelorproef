@@ -215,12 +215,33 @@
 - [ ]   Live data op grafiek weergeven
 - [ ]   Trillingen
 - [ ]	Fase 1 afwerken
-- [ ]   PXL promotor uitnodigen
+- [X]   PXL promotor uitnodigen
 
 ## Maandag
 - 8u tot 16u30 (0,5u pauze)
 - Live data op grafiek weergeven
 - Fase 1 afwerken
+
+## Dinsdag
+- 8u tot 16u30 (0,5u pauze)
+- Live data op grafiek weergeven
+
+## Woensdag
+- 8u tot 16u30 (0,5u pauze)
+- Live data op grafiek weergeven
+
+## Donderdag
+- 
+
+## Vrijdag
+- 
+
+# Week 8
+## Planning
+- [ ]   
+
+## Maandag
+- 
 
 ## Dinsdag
 - 
@@ -234,3 +255,116 @@
 ## Vrijdag
 - 
 
+# Week 9
+## Planning
+- [ ]   
+
+## Maandag
+- 
+
+## Dinsdag
+- 
+
+## Woensdag
+- 
+
+## Donderdag
+- 
+
+## Vrijdag
+- 
+
+# Week 10
+## Planning
+- [ ]   
+
+## Maandag
+- 
+
+## Dinsdag
+- 
+
+## Woensdag
+- 
+
+## Donderdag
+- 
+
+## Vrijdag
+- 
+
+# Week 11
+## Planning
+- [ ]   
+
+## Maandag
+- 
+
+## Dinsdag
+- 
+
+## Woensdag
+- 
+
+## Donderdag
+- 
+
+## Vrijdag
+- 
+
+# Week 12
+## Planning
+- [ ]   
+
+## Maandag
+- 
+
+## Dinsdag
+- 
+
+## Woensdag
+- 
+
+## Donderdag
+- 
+
+## Vrijdag
+- 
+
+# Week 13
+## Planning
+- [ ]   
+
+## Maandag
+- 
+
+## Dinsdag
+- 
+
+## Woensdag
+- 
+
+## Donderdag
+- 
+
+## Vrijdag
+- 
+
+# Week 14
+## Planning
+- [ ]   
+
+## Maandag
+- 
+
+## Dinsdag
+- 
+
+## Woensdag
+- 
+
+## Donderdag
+- 
+
+## Vrijdag
+- 

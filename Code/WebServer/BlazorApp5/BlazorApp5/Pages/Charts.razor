@@ -1,5 +1,5 @@
 ﻿@page "/charts"
-@using DAQ.Models;
+@using BlazorApp5.Models;
 @using PSC.Blazor.Components.Chartjs
 @using PSC.Blazor.Components.Chartjs.Enums
 @using PSC.Blazor.Components.Chartjs.Models
@@ -15,15 +15,14 @@
 @using System.Globalization;
 @using System.IO.Ports;
 @using System.Timers;
-@inject DAQ.Services.BackgroundTaskService BackgroundService
+@inject BlazorApp5.Services.BackgroundTaskService BackgroundService
 
 <h3>Line Simple</h3>
 
-@* <button @onclick="AddValue">Add value</button>
-<button @onclick="SendData">Send Data to COM4</button> *@
-
+<button @onclick="AddValue">Add value</button>
 <Chart Config="_config0" @ref="Voltage" Height="400px"></Chart>
 <Chart Config="_config1" @ref="Current" Height="400px"></Chart>
+<button @onclick="SendData">Send Data to COM4</button>
 
 
 @code {
@@ -63,7 +62,7 @@
     protected override async Task OnInitializedAsync()
     {
         //BackgroundService.UpdateChart();
-        ReadCsvFile("C:/Users/marti/Documents/GitHub/Stage-Bachelorproef/Code/WebServer/DAQ/DAQ/data.csv");
+        ReadCsvFile("C:/Users/marti/Documents/GitHub/Stage-Bachelorproef/Code/WebServer/BlazorApp5/BlazorApp5/data.csv");
         //timer = new System.Timers.Timer(1000); // Set the interval to 1000 milliseconds (1 second)
         //timer.Elapsed += OnTimerElapsed;
         //timer.AutoReset = true;
@@ -133,8 +132,6 @@
         BackgroundService.TimerElapsed += OnTimerElapsed;
 
     }
-
-    /*
     public void AddValue()
     {
         Console.WriteLine("OK OK");
@@ -142,7 +139,6 @@
         //Voltage.AddData(new List<string?>() { $"{DateTime.Now}" }, 0, new List<decimal?>() { rd.Next(0, 20) });
         //Voltage.AddData(null, 1, new List<decimal?>() { rd.Next(0, 20) });
     }
-    */
 
     private void ReadCsvFile(string filePath)
     {
@@ -177,8 +173,8 @@
         }
     }
 
-    /*
     private SerialPort _serialPort;
+
     private void SendData()
     {
         try
@@ -204,19 +200,24 @@
     {
 
     }
-    */
 
-    private async Task UpdateChart()
+    private void UpdateChart()
     {
         
+        /*if (temp.Count > 0)
+        {
         //Console.WriteLine($"temp: {temp}");
-
+        foreach (var point in temp)
+        {*/
+        //await writer.WriteLineAsync($"{point.Time};{point.RPM};{point.Temperature};{point.ThrustN};{point.TorqueNm};{point.VoltageV};{point.CurrentA}");
+        //Random rd = new Random();
         try
         {
             if (_config0 != null && _config1 != null && configCompleted && BackgroundService.Data != null)
             {
-                if (_config0.Options != null && _config1.Options != null)
+                if (_config0.Data != null && _config1.Data != null && BackgroundService.Data.Time != null && BackgroundService.Data.VoltageV != null)
                 {
+
                     Voltage.AddData(new List<string?>() { "0" }, 0, new List<decimal?>() { 5 });
                     Console.WriteLine("OKOKOK");
                     //Current.AddData(new List<string?>() { BackgroundService.Data.Time.ToString() }, 0, new List<decimal?>() { BackgroundService.Data.CurrentA });
