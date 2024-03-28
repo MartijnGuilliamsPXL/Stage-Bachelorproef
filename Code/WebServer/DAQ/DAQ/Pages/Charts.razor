@@ -1,47 +1,58 @@
 ﻿@page "/charts"
-@using DAQ.Models;
+
 @using PSC.Blazor.Components.Chartjs
+@using PSC.Blazor.Components.Chartjs.Models.Line
 @using PSC.Blazor.Components.Chartjs.Enums
 @using PSC.Blazor.Components.Chartjs.Models
 @using PSC.Blazor.Components.Chartjs.Models.Common
-@using PSC.Blazor.Components.Chartjs.Models.Bar
-@using PSC.Blazor.Components.Chartjs.Models.Bubble
-@using PSC.Blazor.Components.Chartjs.Models.Doughnut
-@using PSC.Blazor.Components.Chartjs.Models.Line
-@using PSC.Blazor.Components.Chartjs.Models.Pie
-@using PSC.Blazor.Components.Chartjs.Models.Polar
-@using PSC.Blazor.Components.Chartjs.Models.Radar
-@using PSC.Blazor.Components.Chartjs.Models.Scatter
 @using System.Globalization;
 @using System.IO.Ports;
 @using System.Timers;
-@inject DAQ.Services.BackgroundTaskService BackgroundService
 
 <h3>Line Simple</h3>
 
-@* <button @onclick="AddValue">Add value</button>
-<button @onclick="SendData">Send Data to COM4</button> *@
-
-<Chart Config="_config0" @ref="Voltage" Height="400px"></Chart>
-<Chart Config="_config1" @ref="Current" Height="400px"></Chart>
+@* <Chart Config="_config0" @ref="Time" Height="400px"></Chart> 
+<Chart Config="_config1" @ref="Count" Height="400px"></Chart> *@
+<Chart Config="_config2" @ref="Rpm" Height="400px"></Chart>
+<Chart Config="_config3" @ref="Temperature" Height="400px"></Chart>
+<Chart Config="_config4" @ref="Thrust" Height="400px"></Chart>
+<Chart Config="_config5" @ref="Torque" Height="400px"></Chart>
+<Chart Config="_config6" @ref="Voltage" Height="400px"></Chart>
+<Chart Config="_config7" @ref="Current" Height="400px"></Chart>
 
 
 @code {
     private List<String> time = new List<String>();
+    private List<int?> count = new List<int?>();
+    private List<decimal?> rpm = new List<decimal?>();
+    private List<decimal?> temperature = new List<decimal?>();
+    private List<decimal?> thrust = new List<decimal?>();
+    private List<decimal?> torque = new List<decimal?>();
     private List<decimal?> voltage = new List<decimal?>();
     private List<decimal?> current = new List<decimal?>();
-    private LineChartConfig? _config0;
-    private LineChartConfig? _config1;
+
+    //private LineChartConfig? _config0;
+    //private LineChartConfig? _config1;
+    private LineChartConfig? _config2;
+    private LineChartConfig? _config3;
+    private LineChartConfig? _config4;
+    private LineChartConfig? _config5;
+    private LineChartConfig? _config6;
+    private LineChartConfig? _config7;
+    //private Chart? Time;
+    //private Chart? Count;
+    private Chart? Rpm;
+    private Chart? Temperature;
+    private Chart? Thrust;
+    private Chart? Torque;
     private Chart? Voltage;
     private Chart? Current;
-    private bool configCompleted = false;
-    //System.Timers.Timer timer;
-    public List<DataPoint> temp = new List<DataPoint>();
-    //private int elapsedSeconds;
+    System.Timers.Timer timer;
 
+    private string filePath = "C:/Users/marti/Documents/GitHub/Stage-Bachelorproef/Code/WebServer/DAQ/DAQ/data.csv";
+    private long lastPosition = 0;
+    private string newLines = "";
 
-
-    //private int i = 0;
     public static List<string> PaletteBorder1 = new List<string>()
         {
             "rgb(255, 99, 132)",
@@ -52,122 +63,67 @@
             "rgb(153, 102, 255)",
             "rgb(201, 203, 207)"
         };
-    /*
-    public static List<string> SimpleLineText = new List<string>() { "0", "1", "2", "3", "4", "5", "6" };
-    public static List<decimal?> SimpleLine = new List<decimal?>() { 65, 59, 80, 81, 86, 55, 40 };
-    public static List<decimal?> SimpleLine2 = new List<decimal?>() { 33, 25, 35, 51, 54, 76, 60 };
-    public static List<decimal?> SimpleLine3 = new List<decimal?>() { 53, 91, 39, 61, 39, 87, 23 };
-    public static List<decimal?> test = new List<decimal?>() {0,100};
-    */
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        //BackgroundService.UpdateChart();
-        ReadCsvFile("C:/Users/marti/Documents/GitHub/Stage-Bachelorproef/Code/WebServer/DAQ/DAQ/data.csv");
-        //timer = new System.Timers.Timer(1000); // Set the interval to 1000 milliseconds (1 second)
-        //timer.Elapsed += OnTimerElapsed;
-        //timer.AutoReset = true;
-        //timer.Enabled = true;
+        var timer = new Timer(100);
+        timer.Elapsed += TimerElapsed;
+        timer.AutoReset = true;
 
-        _config0 = new LineChartConfig()
-        {
-            Options = new Options()
-            {
-                RegisterDataLabels = true,
-                Plugins = new Plugins()
-                {
-                    DataLabels = new DataLabels()
-                    {
-                        Align = DatalabelsAlign.Start,
-                        Anchor = DatalabelsAnchor.Start,
-                    }
-                }
-            }
-        };
-        _config0.Options.Animation = false;
+        timer.Start();
+        ReadCsvFile();
 
+        //  public static LineChartConfig CreateLineChartConfig(string label, List<String> xAxis, List<decimal?> data, int min, int max, int color)
+        //_config0 = LineChartHelper.CreateLineChartConfig("Time", time, time, 0, 30, 0);
+        //_config1 = LineChartHelper.CreateLineChartConfig("Count", time, count, 0, 1000, 0);
+        _config2 = LineChartHelper.CreateLineChartConfig("RPM", time, rpm, 0, 14000, 1);
+        _config3 = LineChartHelper.CreateLineChartConfig("Temperature", time, temperature, 10, 40, 2);
+        _config4 = LineChartHelper.CreateLineChartConfig("Thrust", time, thrust, 0, 3, 3);
+        _config5 = LineChartHelper.CreateLineChartConfig("Torque", time, torque, 0, 3, 4);
+        _config6 = LineChartHelper.CreateLineChartConfig("Voltage", time, voltage, 0, 30, 5);
+        _config7 = LineChartHelper.CreateLineChartConfig("Current", time, current, 0, 16, 6);
 
-        _config0.Data.Labels = time;
-        _config0.Data.Datasets.Add(new LineDataset()
-        {
-            Label = "Voltage",
-            Data = voltage,
-            BorderColor = PaletteBorder1.FirstOrDefault(),
-            Tension = 0,
-            Fill = false,
-            //PointRadius= 15,
-            PointStyle = PointStyle.Circle
-        });
-
-        _config1 = new LineChartConfig()
-        {
-            Options = new Options()
-            {
-                RegisterDataLabels = true,
-                Plugins = new Plugins()
-                {
-                    DataLabels = new DataLabels()
-                    {
-                        Align = DatalabelsAlign.Start,
-                        Anchor = DatalabelsAnchor.Start,
-                    }
-                }
-            }
-        };
-        _config1.Options.Animation = false;
-
-        _config1.Data.Labels = time;
-        _config1.Data.Datasets.Add(new LineDataset()
-        {
-            Label = "Current",
-            Data = current,
-            BorderColor = PaletteBorder1.FirstOrDefault(),
-            Tension = 0,
-            Fill = false,
-            //PointRadius= 15,
-            PointStyle = PointStyle.Circle
-        });
-
-        configCompleted = true;
-
-        BackgroundService.TimerElapsed += OnTimerElapsed;
+        //await base.OnInitializedAsync();
 
     }
 
-    /*
-    public void AddValue()
+    private void ReadCsvFile()
     {
-        Console.WriteLine("OK OK");
-        //Random rd = new Random();
-        //Voltage.AddData(new List<string?>() { $"{DateTime.Now}" }, 0, new List<decimal?>() { rd.Next(0, 20) });
-        //Voltage.AddData(null, 1, new List<decimal?>() { rd.Next(0, 20) });
-    }
-    */
-
-    private void ReadCsvFile(string filePath)
-    {
-        //column1Data.Clear();
-        //column2Data.Clear();
-        //column3Data.Clear();
+        time.Clear();
+        count.Clear();
+        rpm.Clear();
+        temperature.Clear();
+        thrust.Clear();
+        torque.Clear();
+        voltage.Clear();
+        current.Clear();
         try
         {
-            using (var streamReader = new StreamReader(filePath))
+            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
-                //bool isFirstLine = true; // Flag to identify the first line
-                //double baseValue = 0;
-
-                while (!streamReader.EndOfStream)
+                fs.Seek(lastPosition, SeekOrigin.Begin);
+                using (StreamReader sr = new StreamReader(fs))
                 {
-                    var line = streamReader.ReadLine();
-                    var values = line.Split(';'); // Assuming CSV is comma-separated
-
-                    if (values.Length >= 3)
+                    while (!sr.EndOfStream)
                     {
-                        // Adding data to respective columns
-                        time.Add(values[0]);
-                        voltage.Add(decimal.Parse(values[6]));
-                        current.Add(decimal.Parse(values[7]));
+                        var line = sr.ReadLine();
+                        var values = line.Split(';'); // Assuming CSV is comma-separated
+
+                        if (values.Length >= 3)
+                        {
+                            // Adding data to respective columns
+                            time.Add(values[0]);
+                            count.Add(int.Parse(values[1]));
+                            rpm.Add(decimal.Parse(values[2]));
+                            temperature.Add(decimal.Parse(values[3]));
+                            thrust.Add(decimal.Parse(values[4]));
+                            torque.Add(decimal.Parse(values[5]));
+                            voltage.Add(decimal.Parse(values[6]));
+                            current.Add(decimal.Parse(values[7]));
+                        }
                     }
+                    lastPosition = fs.Position;
+                    //Console.WriteLine($"lastPosition: {lastPosition}");
                 }
             }
         }
@@ -177,71 +133,98 @@
         }
     }
 
+
+
     /*
-    private SerialPort _serialPort;
-    private void SendData()
-    {
-        try
-        {
-            _serialPort = new SerialPort("COM4", 115200);
-            _serialPort.Open();
-
-            // Example: Send "Hello, World!" to COM4
-            string dataToSend = "1200";
-            _serialPort.Write(dataToSend);
-
-            // Close the port when done
-            _serialPort.Close();
-        }
-        catch (Exception ex)
-        {
-            // Handle exceptions (e.g., port not available, permission issues)
-            Console.WriteLine($"Error: {ex.Message}");
-        }
-    }
-
     private void createCharts(LineChartConfig? config, string label, List<Decimal> data)
     {
 
     }
     */
 
-    private async Task UpdateChart()
+    private void UpdateChart()
     {
-        
-        //Console.WriteLine($"temp: {temp}");
-
         try
         {
-            if (_config0 != null && _config1 != null && configCompleted && BackgroundService.Data != null)
+            if (Voltage != null && Current != null)
             {
-                if (_config0.Options != null && _config1.Options != null)
+                for (int i = 0; i < current.Count; i++)
                 {
-                    Voltage.AddData(new List<string?>() { "0" }, 0, new List<decimal?>() { 5 });
-                    Console.WriteLine("OKOKOK");
-                    //Current.AddData(new List<string?>() { BackgroundService.Data.Time.ToString() }, 0, new List<decimal?>() { BackgroundService.Data.CurrentA });
-                }
-                else
-                {
-                    Console.WriteLine("test123");
+                    Rpm.AddData(new List<string?>() { time[i] }, 0, new List<decimal?>() { rpm[i] });
+                    Temperature.AddData(new List<string?>() { time[i] }, 0, new List<decimal?>() { temperature[i] });
+                    Thrust.AddData(new List<string?>() { time[i] }, 0, new List<decimal?>() { thrust[i] });
+                    Torque.AddData(new List<string?>() { time[i] }, 0, new List<decimal?>() { torque[i] });
+                    Voltage.AddData(new List<string?>() { time[i] }, 0, new List<decimal?>() { voltage[i] });
+                    Current.AddData(new List<string?>() { time[i] }, 0, new List<decimal?>() { current[i] });
                 }
             }
-            else
-            {
-                Console.WriteLine("test");
-            }
-
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"FAILED addData(): {ex.Message}");
+            Console.WriteLine($"FAILED UpdateChart: {ex.Message}");
+        }
+
+    }
+
+    private void TimerElapsed(object sender, ElapsedEventArgs e)
+    {
+        ReadCsvFile();
+        UpdateChart();
+    }
+
+    public void Dispose()
+    {
+        timer.Dispose();
+        Voltage.Dispose();
+        Current.Dispose();
+    }
+
+    public class LineChartHelper
+    {
+        public static LineChartConfig CreateLineChartConfig(string label, List<String> xAxis, List<decimal?> data, int min, int max, int color)
+        {
+            var config = new LineChartConfig()
+            {
+                Options = new Options()
+                {
+                    RegisterDataLabels = true,
+                    Plugins = new Plugins()
+                    {
+                        DataLabels = new DataLabels()
+                        {
+                            Align = DatalabelsAlign.Start,
+                            Anchor = DatalabelsAnchor.Start,
+                        }
+                    },
+                    Scales = new Dictionary<string, Axis>()
+                    {
+                        {
+                            Scales.YAxisId, new Axis()
+                            {
+                                Min = min,
+                                Max = max
+                            }
+                        }
+                    }
+                }
+            };
+            config.Options.Animation = false;
+
+
+            config.Data.Labels = xAxis;
+            config.Data.Datasets.Add(new LineDataset()
+            {
+                Label = label,
+                Data = data,
+                BorderColor = PaletteBorder1[color],
+                Tension = 0,
+                Fill = false,
+                //PointRadius= 15,
+                PointStyle = PointStyle.Circle
+            });
+
+            return config;
         }
     }
 
-    private void OnTimerElapsed()
-    {
-        //temp = BackgroundService.buffer;
-        //Console.WriteLine("test");
-        UpdateChart();
-    }
 }

@@ -1,0 +1,19 @@
+﻿<h3>Chart</h3>
+@page "/chart"
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+
+<canvas id="myChart"></canvas>
+
+@code {
+    private string[] Labels = { "Jan", "Feb", "Mar", "Apr", "May" };
+    private double[] Data = { 10, 20, 15, 30, 25 };
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("chartInterop.createLineChart", "myChart", Labels, Data);
+        }
+    }
+}

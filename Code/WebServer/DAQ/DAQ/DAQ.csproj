@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="C:\Users\marti\.nuget\packages\psc.blazor.components.chartjs\6.0.44\contentFiles\any\net6.0\wwwroot\Chart.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\chartInterop.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="PSC.Blazor.Components.Chartjs" Version="6.0.44" />
     <PackageReference Include="System.IO.Ports" Version="8.0.0" />
   </ItemGroup>

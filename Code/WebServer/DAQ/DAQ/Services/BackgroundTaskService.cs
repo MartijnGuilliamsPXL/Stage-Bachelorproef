@@ -5,12 +5,13 @@ using System.Text;
 using DAQ.Models;
 using System.Globalization;
 using System.Timers;
+using System.Security.Cryptography.X509Certificates;
 
 namespace DAQ.Services
 {
     public class BackgroundTaskService : BackgroundService
     {
-        public Action TimerElapsed;
+        //public Action TimerElapsed;
         private SerialPort _serialPort;
         private StringBuilder _receivedDataBuffer = new StringBuilder();
         public List<DataPoint> buffer = new List<DataPoint>(); // Buffer list to store data temporarily
@@ -18,6 +19,7 @@ namespace DAQ.Services
         //public System.Timers.Timer? timer;
         //public bool addValues = false;
         private int count = 0;
+        //public event EventHandler Handler;
 
         public BackgroundTaskService()
         {
@@ -25,7 +27,10 @@ namespace DAQ.Services
             _serialPort.DtrEnable = true;
             _serialPort.Open();
             Console.WriteLine("Created SerialService");
+
         }
+
+       
 
         private async Task ReadSerialPortAsync(CancellationToken cancellationToken)
         {
@@ -54,8 +59,9 @@ namespace DAQ.Services
 
                             Console.WriteLine($"Received: {message}");
                             ParseAndAddData(message);
-                            TimerElapsed?.Invoke();
-                            await SaveBufferToCSV();
+                            //OnValueUpdated(EventArgs.Empty);
+                            //TimerElapsed?.Invoke();
+                            SaveBufferToCSV();
                             count++;
 
                             // Calculate frequency or perform other operations here
